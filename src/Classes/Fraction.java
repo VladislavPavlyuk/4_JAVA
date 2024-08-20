@@ -16,6 +16,7 @@ package Classes;/*
  */
 
 import java.util.Objects;
+import java.util.Scanner;
 
 public final class Fraction {
     private int numerator;
@@ -29,25 +30,28 @@ public final class Fraction {
 
     // Конструктор с 1 параметром
     public Fraction(int num) {
+        this();
         this.numerator = num;
         this.denominator = 1;
     }
 
     // Конструктор с 2 параметрами
     public Fraction(int numerator, int denominator) {
-        if (denominator == 0) {
-            throw new IllegalArgumentException("The denominator is zero.");
-        }
-        if (numerator == 0) {
-            this.numerator = 0;
-            this.denominator = 1;
-        } else {
-            this.numerator = numerator;
-            this.denominator = denominator;
-        }
-        if (denominator < 0) {
-            this.numerator = -1 * this.numerator;
-            this.denominator = -1 * this.denominator;
+        this(numerator);
+        this.denominator = denominator;
+        if (denominator != 0) {
+            if (numerator == 0) {
+                this.numerator = 0;
+                this.denominator = 1;
+            } else {
+                this.numerator = numerator;
+                this.denominator = denominator;
+            }
+            if (denominator < 0) {
+                this.numerator = -1 * this.numerator;
+                this.denominator = -1 * this.denominator;
+        }} else {
+            throw new IllegalArgumentException("Error! The denominator is zero.");
         }
     }
 
@@ -71,71 +75,81 @@ public final class Fraction {
     }
 
     public void setDenominator(int denominator) {
-        this.denominator = denominator;
+        if (denominator != 0) {
+            this.denominator = denominator;
+        } else {
+            throw new IllegalArgumentException("Error! The denominator is zero.");
+        }
     }
 
     // Метод для вывода данных
     public void print() {
-        System.out.println(numerator + "/" + denominator);
+        //System.out.println(numerator + "/" + denominator);
+        if (denominator != 0) {
+            if  (denominator != 1) {
+                System.out.println(numerator + "/" + denominator);
+            } else {
+                System.out.println(numerator);
+            }
+        } else {
+            throw new IllegalArgumentException("Error! The denominator is zero.");
+        }
     }
 
-    // Метод для сложения дробей 1
+    // Метод для сложения дробей
     public Fraction add(Fraction other) {
+        if ((denominator != 0)&&(other.denominator != 0)) {
         int newNumerator = this.numerator * other.denominator + other.numerator * this.denominator;
         int newDenominator = this.denominator * other.denominator;
         return new Fraction(newNumerator, newDenominator);
+        } else {
+            throw new IllegalArgumentException("Error! The denominator is zero.");
+        }
     }
 
-    // Метод для сложения дробей 2
-    public static Fraction add(Fraction f1, Fraction f2) {
-        return new Fraction(f1.numerator * f2.denominator + f2.numerator * f1.denominator,
-                f1.denominator * f2.denominator);
-    }
-
-    // Метод для вычитания дробей 1
+    // Метод для вычитания дробей
     public Fraction subtract(Fraction other) {
+        if ((denominator != 0)&&(other.denominator != 0)) {
         int newNumerator = this.numerator * other.denominator - other.numerator * this.denominator;
         int newDenominator = this.denominator * other.denominator;
         return new Fraction(newNumerator, newDenominator);
+        } else {
+            throw new IllegalArgumentException("Error! The denominator is zero.");
+        }
     }
 
-    // Метод для вычитания дробей 2
-    public static Fraction subtract(Fraction f1, Fraction f2) {
-        return new Fraction(f1.numerator * f2.denominator - f2.numerator * f1.denominator,
-                f1.denominator * f2.denominator);
-    }
-
-    // Метод для умножения дробей 1
+    // Метод для умножения дробей
     public Fraction multiply(Fraction other) {
-        int newNumerator = this.numerator * other.numerator;
-        int newDenominator = this.denominator * other.denominator;
-        return new Fraction(newNumerator, newDenominator);
+        if ((denominator != 0)&&(other.denominator != 0)) {
+            int newNumerator = this.numerator * other.numerator;
+            int newDenominator = this.denominator * other.denominator;
+            return new Fraction(newNumerator, newDenominator);
+        } else {
+                throw new IllegalArgumentException("Error! The denominator is zero.");
+            }
     }
 
-    // Метод для умножения дробей 1
-    public static Fraction multiply(Fraction f1, Fraction f2) {
-        return new Fraction(f1.numerator * f2.numerator,
-                f1.denominator * f2.denominator);
-    }
-
-    // Метод для деления дробей 1
+    // Метод для деления дробей
     public Fraction divide(Fraction other) {
+        if ((denominator != 0)&&(other.denominator != 0)) {
         int newNumerator = this.numerator * other.denominator;
         int newDenominator = this.denominator * other.numerator;
-        return new Fraction(newNumerator, newDenominator);
-    }
-    // Метод для деления дробей 2
-    public static Fraction divide(Fraction f1, Fraction f2) {
-        return new Fraction(f1.numerator * f2.denominator,
-                f1.denominator * f2.numerator);
+        return new Fraction(newNumerator, newDenominator);}
+        else {
+            throw new IllegalArgumentException("Error! The denominator is zero.");
+        }
     }
 
     @Override
     public String toString() {
-        if (denominator != 1) {
-            return numerator + "/" + denominator;
+        if (denominator != 0) {
+                if  (denominator != 1) {
+                return numerator + "/" + denominator;
+            } else {
+                return Integer.toString(numerator);
+            }
         } else {
-            return Integer.toString(numerator);
+            throw new IllegalArgumentException("Error! The denominator is zero.");
         }
     }
 
@@ -150,5 +164,23 @@ public final class Fraction {
     @Override
     public int hashCode() {
         return Objects.hash(numerator, denominator);
+    }
+
+    // Методы для ввода данных
+    public void inputData() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите числитель : ");
+        this.numerator = Integer.parseInt(scanner.nextLine());
+
+        int temp;
+        do  {
+            System.out.print("Введите знаменатель : ");
+            temp = Integer.parseInt(scanner.nextLine());
+            if (temp == 0) {
+                System.out.println("Error! The denominator is zero. Please try again!");
+            }
+        } while (temp == 0);
+        this.denominator = temp;
     }
 }

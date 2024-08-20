@@ -40,6 +40,7 @@ public class City {
 
     // Конструктор с параметрами
     public City(String cityName, String regionName, String countryName, int population, String postalCode, String phoneCode) {
+        this();
         this.cityName = cityName;
         this.regionName = regionName;
         this.countryName = countryName;

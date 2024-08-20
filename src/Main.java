@@ -1,6 +1,7 @@
 import Classes.*;
 
 import static Classes.Fraction.*;
+import static Classes.Fractions.addFraction;
 
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -59,35 +60,47 @@ public class Main {
         Country country3 = new Country(country2);
         country3.displayData("Копия: ");
 
-        Fraction f1 = new Fraction();
+        Fractions f1 = new Fractions();
         f1.setNumerator(2);
         f1.setDenominator(3);
-        System.out.println(f1);
-        System.out.println(f1.toString());
+        f1.print();
+
 
         Fraction f2 = new Fraction(5);
-        System.out.println(f2);
+        f2.print();
+
 
         Fraction f3 = new Fraction(3,4);
-        System.out.println(f3);
+        System.out.println(f3.toString());
 
-        System.out.println(f1.add(f2));
-        System.out.println(add(f1,f2));
+        System.out.println(f1.equals(f2));
+        System.out.println(f2.equals(f3));
 
-        System.out.println(f1.subtract(f3));
-        System.out.println(subtract(f1,f3));
-
-        System.out.println(f1.multiply(f3));
-        System.out.println(multiply(f1,f3));
-
-        System.out.println(f1.divide(f3));
-        System.out.println(divide(f1,f3));
-
-        System.out.println(f2.equals(f1));
 
         System.out.println(f2.hashCode());
 
+            Fraction f4 = new Fraction();
+            f4.inputData();
+
+            System.out.println(f4);
+
+            System.out.println(f4.add(f2));
+
+            System.out.println(f4.subtract(f3));
+
+            System.out.println(f4.multiply(f3));
+
+            System.out.println(f4.divide(f3));
+
+            System.out.println(f3.equals(f3));
+
+
+
         // Пример использования класса Book
+        Book book = new Book();
+        book.inputData();
+        book.printBookInfo();
+
         Book book1 = new Book(
                 "Название книги",
                 "Автор ФИО",
@@ -110,6 +123,11 @@ public class Main {
 
         book1.printBookInfo();
 
+
+        Car car = new Car();
+        car.inputData();
+        car.printInfo();
+        car.printInfo(true);
 
         Car car1 = new Car();
         car1.setName("Corolla");

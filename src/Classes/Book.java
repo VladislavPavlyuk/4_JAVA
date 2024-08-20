@@ -15,6 +15,8 @@ package Classes;
 грузки методов.
  */
 
+import java.util.Scanner;
+
 public class Book {
     private String title; //название книги
     private String author; //ФИО автора
@@ -35,6 +37,7 @@ public class Book {
 
     // Конструктор с параметрами
     public Book(String title, String author, int year, String publisher, String genre, int pages) {
+        this();
         this.title = title;
         this.author = author;
         this.year = year;
@@ -51,6 +54,29 @@ public class Book {
         this.publisher = other.publisher;
         this.genre = other.genre;
         this.pages = other.pages;
+    }
+
+    // Методы для ввода данных
+    public void inputData() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите название книги: ");
+        this.title = scanner.nextLine();
+
+        System.out.print("Введите имя автора: ");
+        this.author = scanner.nextLine();
+
+        System.out.print("Введите год издания: ");
+        this.year = Integer.parseInt(scanner.nextLine());
+
+        System.out.print("Введите название Издателя: ");
+        this.publisher = scanner.nextLine();
+
+        System.out.print("Введите жанр: ");
+        this.genre = scanner.nextLine();
+
+        System.out.print("Введите количество страниц: ");
+        this.pages = Integer.parseInt(scanner.nextLine());
     }
 
     // Методы для ввода данных
@@ -112,6 +138,4 @@ public class Book {
         System.out.println("Жанр: " + genre);
         System.out.println("Количество страниц: " + pages);
     }
-
-
 }

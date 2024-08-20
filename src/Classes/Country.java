@@ -39,6 +39,7 @@ public class Country {
 
     // Конструктор с параметрами
     public Country(String countryName, String continentName, int population, String phoneCode, String capitalCity, String[] cities) {
+        this();
         this.countryName = countryName;
         this.continentName = continentName;
         this.population = population;

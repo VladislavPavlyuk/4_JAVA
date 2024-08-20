@@ -11,6 +11,8 @@ package Classes;/*
 Используйте механизм перегрузки методов.
  */
 
+import java.util.Scanner;
+
 public class Car {
     private String name;
     private String manufacturer;
@@ -27,6 +29,7 @@ public class Car {
 
     // Конструктор с параметрами
     public Car(String name, String manufacturer, int year, double engineVolume) {
+        this();
         this.name = name;
         this.manufacturer = manufacturer;
         this.year = year;
@@ -39,6 +42,22 @@ public class Car {
         this.manufacturer = other.manufacturer;
         this.year = other.year;
         this.engineVolume = other.engineVolume;
+    }
+    // Методы для ввода данных
+    public void inputData() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите модель: ");
+        this.name = scanner.nextLine();
+
+        System.out.print("Введите название изготовителя: ");
+        this.manufacturer = scanner.nextLine();
+
+        System.out.print("Введите год производства: ");
+        this.year = Integer.parseInt(scanner.nextLine());
+
+        System.out.print("Введите объем двигателя,л.: ");
+        this.engineVolume = Double.parseDouble(scanner.nextLine());
     }
 
     // Методы для ввода данных
